@@ -2,11 +2,8 @@
 #include "complex.hpp"
 
 int main(){
-
-  Complex a;
-  a.real = 0.0;
-  a.imagin = j*0.0;
-
-  return 0;
+	Complex comp(0.0,0.0);
+	std::cout << "Parte real: " << comp.real << ", Parte imaginaria: " << comp.imagin << std::endl;
+	return 0;
 }
 
