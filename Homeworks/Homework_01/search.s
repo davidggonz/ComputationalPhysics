@@ -1,0 +1,2 @@
+du -k archivo
+
