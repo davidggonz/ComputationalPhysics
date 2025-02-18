@@ -1,0 +1,19 @@
+#! /bin/bash
+
+i=$1 #Asigna el primer argumento dado al invocar el script a la 'variable' i
+N=$2 #Asigna el segundo argumento dado al invocar el script a la 'variable' N
+
+#Generará los N archivos con los nombres adecuados
+for ((j=0; j<i; j++)); do
+  filename="rand${j}_${N}.dat"
+  
+  #Corre el archivo random.sh y asigna los números al archivo nuevo
+  for ((k=0; k<N; k++)); do 
+    #Extrae los números y los asigna dentro de 'filename'
+    number=$(bash random.sh | awk '/^[0-9]+$/{print;exit}')
+	echo -e "$number" >> $filename
+  done #Continua con la lectura del archivo
+
+  #Los escribe en formato columna
+  echo "Archivo $filename generado con $N números aleatorios."
+done #Continua con la lectura del archivo (última línea)

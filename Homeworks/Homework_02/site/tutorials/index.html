@@ -1,0 +1,392 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../explanation/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>Tutorials - Cuadratura Gaussiana</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.a40c8224.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tutorials" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Cuadratura Gaussiana" class="md-header__button md-logo" aria-label="Cuadratura Gaussiana" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Cuadratura Gaussiana
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Tutorials
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Cuadratura Gaussiana" class="md-nav__button md-logo" aria-label="Cuadratura Gaussiana" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Cuadratura Gaussiana
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ¿Qué se hará en esta página?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cuadratura Gaussiana
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Tutorials
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="tutorials">Tutorials</h1>
+<p>Se importan las librerías
+        import numpy as np</p>
+<p>La N representa el N-ésimo polinomio de Legendre</p>
+<pre><code>    def gaussxw(N):
+    #Creamos un aproximado inicial
+    init_a = np.linspace(3, 4 * (N - 1), N) / ((4 * N) + 2)
+    #Se define un código vectorial
+    x = np.cos(np.pi * init_a + 1 / (8 * N * N * np.tan(init_a)))
+
+    #Ahora se calculan las raíces de los polinomios utilizando a Newton de la forma:
+    epsilon = 1e-15 #Genera un límite para cuando el error sea menor a este epsilon
+    delta = 1.0 #Este delta tendrá que irse haciendo más pequeño hasta que la aproximación sea buena
+    while delta &gt; epsilon:
+    p0 = np.ones(N, dtype = float) #Inicializa el polinomio de Legendre de orden 0 como un array lleno de unos.
+    p1 = np.copy(x) #Copia profunda del array x, que representa las raíces iniciales aproximadas del polinomio.
+    for k in range(1, N):
+        p0, p1 = p1, ((2 * k + 1) * x * p1 - k * p0) / (k + 1) #Este bucle calcula los polinomios de Legendre usando una relación de recurrencia.
+    dp = (N + 1) * (p0 - x * p1) / (1 - x * x) #Calcula la derivada de los polinomios de Legendre evaluados en x.
+    dx = p1 / dp #Determina el cambio que debe aplicarse a x usando el método de Newton 
+    x -= dx #Actualiza las raíces aproximadas en x restando la corrección dx.
+    delta = np.max(np.abs(dx)) #Calcula el máximo cambio absoluto entre las aproximaciones sucesivas.
+
+    # Ahora calculamos los pesos
+    w = 2 * (N + 1) * (N + 1)/(N * N * (1 - x * x) * dp * dp)
+
+    return x,w #Devuelve los pesos y puntos de colocación
+</code></pre>
+<p>Se define un integrando tal que:</p>
+<pre><code>    def integrando(x):
+        return (x**6) - (x**2) * np.sin(2*x)
+</code></pre>
+<p>Resultado que debería dar: 331.45884423 (Calculadora en grados)</p>
+<pre><code>    def gaussxwab(x_inf_ver, x_sup_ver, x, w): #'Estira' el espacio de los polinomios con una escala basada en una función constante
+        return 0.5 * (x_sup_ver - x_inf_ver) * x + 0.5 * (x_sup_ver + x_inf_ver), 0.5 * (x_sup_ver - x_inf_ver) * w
+</code></pre>
+<p>Ahora se crea un bucle para obtener información hasta que el error sea mínimo tal que:
+        # Inicializar variables
+        error = 1.0
+        N = 2
+        Int_prev = 0.0</p>
+<pre><code>    while error &gt;= 1e-2:
+        # Obtener los puntos y pesos de Gauss-Legendre
+        x_no_esc, w_no_esc = gaussxw(N)
+
+        # Escalar los puntos y pesos al intervalo [a, b]
+        a, b = 1, 3  # Intervalo de integración
+        x_Escalado, w_Escalado = gaussxwab(a, b, x_no_esc, w_no_esc)
+
+        # Calcular la integral
+        Int_current = np.sum(w_Escalado * integrando(x_Escalado))
+
+        # Calcular el error relativo
+        if N &gt; 2:
+            error = np.abs(Int_current - Int_prev) / Int_prev
+
+        # Actualizar el valor previo de la integral
+        Int_prev = Int_current
+
+        # Imprimir resultados para cada N
+        print(f"N = {N}, Integral = {Int_current}, Error = {error}")
+
+        # Incrementar N
+        N += 1
+
+    # Donde ahora se printea el resultado final
+     print(f"La integral converge a {Int_current} con un error &lt; 1e-6 para N = {N-1}")
+
+    #Esto podría haberse hecho para que el error fuera menor a esta escala, pero luego de 10e-3 ya llega a niveles de N=100
+</code></pre>
+<p>Con lo anterior se obtuvo lo siguiente:</p>
+<pre><code>    N = 2, Integral = 598.2404774605827, Error = 1.0
+    N = 3, Integral = 375.4943611830493, Error = 0.37233541471992737
+    N = 4, Integral = 317.3453903341579, Error = 0.15485977117122252
+    N = 5, Integral = 448.1161248127398, Error = 0.4120769939052309
+    N = 6, Integral = 414.07734547752426, Error = 0.07595972885251517
+    N = 7, Integral = 317.34424667222606, Error = 0.23361118366362976
+    N = 8, Integral = 390.097787254512, Error = 0.22925747463583473
+    N = 9, Integral = 332.3799946552451, Error = 0.14795724170978183
+    N = 10, Integral = 331.4588419779472, Error = 0.0027713842352436817
+    La integral converge a 331.4588419779472 con un error &lt; 1e-6 para N = 10
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
